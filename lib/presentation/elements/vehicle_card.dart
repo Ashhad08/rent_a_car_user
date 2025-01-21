@@ -45,7 +45,11 @@ class VehicleCard extends StatelessWidget {
     }
     return GestureDetector(
       onTap: () {
-        //
+        // getIt<NavigationHelper>().push(
+        //     context,
+        //     VehicleDetailsView(
+        //       vehicle: vehicle,
+        //     ));
       },
       child: Stack(
         children: [
