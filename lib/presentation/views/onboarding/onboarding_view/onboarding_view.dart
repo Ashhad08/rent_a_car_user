@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../../constants/extensions.dart';
+import '../../../../domain/services/session_manager.dart';
 import '../../../../generated/assets.dart';
 import '../../../../navigation/navigation_helper.dart';
 import '../../auth/login_sign_up_view.dart';
+import '../../home_view/home_view.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -95,6 +97,18 @@ class _OnboardingViewState extends State<OnboardingView> {
                           ),
                         );
                 },
+              ),
+            ),
+          ),
+          Positioned(
+            top: 0,
+            right: 0,
+            left: 0,
+            child: SafeArea(
+              child: Image.asset(
+                Assets.imagesAppLogo,
+                height: 60,
+                width: 60,
               ),
             ),
           ),
@@ -201,10 +215,18 @@ class _OnboardingViewState extends State<OnboardingView> {
                               return ElevatedButton(
                                 onPressed: () async {
                                   if (isLastPage) {
-                                    getIt<NavigationHelper>().pushReplacement(
-                                      context,
-                                      const LoginSignUpView(),
-                                    );
+                                    final isLoggedIn =
+                                        await SessionManager().isLoggedIn();
+                                    await Future.delayed(
+                                        const Duration(seconds: 3));
+                                    if (!mounted || !context.mounted) return;
+                                    if (isLoggedIn) {
+                                      getIt<NavigationHelper>().pushReplacement(
+                                          context, const HomeView());
+                                    } else {
+                                      getIt<NavigationHelper>().pushReplacement(
+                                          context, const LoginSignUpView());
+                                    }
                                   } else {
                                     await Future.wait([
                                       _primaryController.nextPage(

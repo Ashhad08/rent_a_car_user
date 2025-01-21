@@ -2,6 +2,8 @@
 class Assets {
   Assets._();
 
+  static const String iconsPhone = 'assets/icons/phone.png';
+  static const String iconsWhatsapp = 'assets/icons/whatsapp.png';
   static const String imagesAppLogo = 'assets/images/app_logo.png';
   static const String imagesLoginBg = 'assets/images/login_bg.jpeg';
   static const String imagesOnboarding1 = 'assets/images/onboarding_1.png';

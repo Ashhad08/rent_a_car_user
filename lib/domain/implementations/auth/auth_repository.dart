@@ -64,6 +64,7 @@ class AuthRepository extends BaseAuthRepository {
           'email': email,
           'password': password,
           'name': fullName,
+          'profileImage': image,
         },
       );
       return ResponseModel.fromJson(

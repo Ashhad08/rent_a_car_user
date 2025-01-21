@@ -26,7 +26,53 @@ class VehicleRepository extends BaseVehicleRepository {
                     data!.map((e) => VehicleModel.fromJson(e))),
           ).data ??
           [];
-    } catch (e,stackTrace) {
+    } catch (e, stackTrace) {
+      debugPrint(stackTrace.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<VehicleModel>> getVehiclesByMake(String makeName) async {
+    try {
+      final res = await super.networkRepository.post(
+          uri: super.backendConfigs.buildUri(segments: [
+            super.backendConfigs.vehicle,
+            super.backendConfigs.byMake,
+          ]),
+          data: {"makeName": makeName});
+      return ResponseModel<List<VehicleModel>>.fromJson(
+            res,
+            (data) => data == null
+                ? []
+                : List<VehicleModel>.from(
+                    data!.map((e) => VehicleModel.fromJson(e))),
+          ).data ??
+          [];
+    } catch (e, stackTrace) {
+      debugPrint(stackTrace.toString());
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<VehicleModel>> getVehiclesByType(String typeId) async {
+    try {
+      final res = await super.networkRepository.post(
+          uri: super.backendConfigs.buildUri(segments: [
+            super.backendConfigs.vehicle,
+            super.backendConfigs.byType,
+          ]),
+          data: {"typeID": typeId});
+      return ResponseModel<List<VehicleModel>>.fromJson(
+            res,
+            (data) => data == null
+                ? []
+                : List<VehicleModel>.from(
+                    data!.map((e) => VehicleModel.fromJson(e))),
+          ).data ??
+          [];
+    } catch (e, stackTrace) {
       debugPrint(stackTrace.toString());
       rethrow;
     }

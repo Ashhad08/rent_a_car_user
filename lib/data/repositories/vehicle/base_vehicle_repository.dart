@@ -23,4 +23,8 @@ abstract class BaseVehicleRepository {
   NetworkRepository get networkRepository => _networkRepository;
 
   Future<List<VehicleModel>> getAvailableVehicles();
+
+  Future<List<VehicleModel>> getVehiclesByMake(String makeName);
+
+  Future<List<VehicleModel>> getVehiclesByType(String typeId);
 }

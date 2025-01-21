@@ -53,14 +53,17 @@ class AvailableVehiclesView extends StatelessWidget {
                     ),
                   );
                 } else if (state is AvailableVehiclesLoaded) {
-                  return ListView.separated(
-                    separatorBuilder: (context, index) => 12.height,
-                    padding: EdgeInsets.all(10),
-                    itemCount: state.vehicles.length,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => VehicleCard(
-                      vehicle: state.vehicles[index],
+                  return RefreshIndicator.adaptive(
+                    onRefresh: () async => context
+                        .read<AvailableVehiclesBloc>()
+                        .add(LoadAvailableVehiclesEvent()),
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => 12.height,
+                      padding: EdgeInsets.all(10),
+                      itemCount: state.vehicles.length,
+                      itemBuilder: (context, index) => VehicleCard(
+                        vehicle: state.vehicles[index],
+                      ),
                     ),
                   );
                 }

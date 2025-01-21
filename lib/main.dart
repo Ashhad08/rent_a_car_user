@@ -5,6 +5,7 @@ import 'blocs/master_data/vehicle_all_features_bloc/vehicle_all_features_bloc.da
 import 'blocs/master_data/vehicle_all_makes_bloc/vehicle_all_makes_bloc.dart';
 import 'blocs/master_data/vehicle_all_types_bloc/vehicle_all_types_bloc.dart';
 import 'blocs/master_data/vehicle_models_bloc/vehicle_models_bloc.dart';
+import 'blocs/promotion/all_promotions_bloc/all_promotions_bloc.dart';
 import 'blocs/vehicle/available_vehicles_bloc/available_vehicles_bloc.dart';
 import 'configurations/backend_configs.dart';
 import 'configurations/error_messages.dart';
@@ -13,11 +14,12 @@ import 'constants/extensions.dart';
 import 'constants/theme.dart';
 import 'domain/implementations/auth/auth_repository.dart';
 import 'domain/implementations/master_data/master_data_repository.dart';
+import 'domain/implementations/promotion/promotion_repository.dart';
 import 'domain/implementations/vehicle/vehicle_repository.dart';
 import 'domain/services/image_services.dart';
 import 'navigation/navigation_helper.dart';
 import 'network/network_repository.dart';
-import 'presentation/views/onboarding/splash_view/splash_view.dart';
+import 'presentation/views/onboarding/onboarding_view/onboarding_view.dart';
 import 'utils/utils.dart';
 
 void main() {
@@ -45,6 +47,11 @@ void main() {
       backendConfigs: getIt<BackendConfigs>(),
       networkRepository: getIt<NetworkRepository>(),
       imageServices: getIt<ImageServices>()));
+  getIt.registerSingleton(PromotionRepository(
+    backendConfigs: getIt<BackendConfigs>(),
+    networkRepository: getIt<NetworkRepository>(),
+  ));
+
   runApp(const RentACar());
 }
 
@@ -82,6 +89,10 @@ class RentACar extends StatelessWidget {
           create: (context) => AvailableVehiclesBloc(getIt<VehicleRepository>())
             ..add(LoadAvailableVehiclesEvent()),
         ),
+        BlocProvider<AllPromotionsBloc>(
+          create: (context) => AllPromotionsBloc(getIt<PromotionRepository>())
+            ..add(LoadAllPromotionsEvent()),
+        ),
       ],
       child: MaterialApp(
         title: 'Rent A Car User',
@@ -89,7 +100,7 @@ class RentACar extends StatelessWidget {
         darkTheme: getIt<AppThemes>().darkTheme,
         theme: getIt<AppThemes>().darkTheme,
         themeMode: ThemeMode.dark,
-        home: const SplashView(),
+        home: const OnboardingView(),
       ),
     );
   }

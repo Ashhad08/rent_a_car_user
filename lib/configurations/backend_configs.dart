@@ -8,6 +8,13 @@ class BackendConfigs {
   final _signUp = 'add-customer';
   final String _vehicle = 'vehicle';
   final _vehicleAllFeatures = 'all-features';
+  final _byMake = 'search-by-make';
+  final _byType = 'search-by-type';
+  final _promotion = 'promo';
+
+  get promotion => _promotion;
+
+  get byMake => _byMake;
 
   String get vehicle => _vehicle;
   final _vehicleAllMakes = 'all-makes';
@@ -35,4 +42,6 @@ class BackendConfigs {
   get vehicleAllTypes => _vehicleAllTypes;
 
   get vehicleAllModels => _vehicleAllModels;
+
+  get byType => _byType;
 }
