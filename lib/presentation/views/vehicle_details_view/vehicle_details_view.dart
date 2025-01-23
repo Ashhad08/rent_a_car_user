@@ -11,6 +11,7 @@ import '../../../domain/services/session_manager.dart';
 import '../../../generated/assets.dart';
 import '../../../navigation/navigation_helper.dart';
 import '../auth/login_sign_up_view.dart';
+import '../book_vehicle_view/book_vehicle_view.dart';
 
 class VehicleDetailsView extends StatelessWidget {
   const VehicleDetailsView({super.key, required this.vehicle});
@@ -158,7 +159,8 @@ class VehicleDetailsView extends StatelessWidget {
                 dividerHeight: 0,
                 indicatorColor: Colors.white,
                 labelColor: Colors.white,
-                labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                labelStyle:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 tabAlignment: TabAlignment.center,
               ),
               18.height,
@@ -318,8 +320,8 @@ class VehicleDetailsView extends StatelessWidget {
                             PageView.builder(
                               itemCount: vehicle.images?.length,
                               itemBuilder: (context, index) => Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
                                   child: Image(
@@ -383,7 +385,11 @@ class VehicleDetailsView extends StatelessWidget {
                     final user = await SessionManager().getCurrentUser();
                     if (context.mounted) {
                       if (user != null) {
-
+                        getIt<NavigationHelper>().push(
+                            context,
+                            BookVehicleView(
+                                vehicle: vehicle,
+                                customerId: user.customerId.toString()));
                       } else {
                         getIt<NavigationHelper>()
                             .push(context, LoginSignUpView());

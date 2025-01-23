@@ -65,6 +65,12 @@ class _OnboardingViewState extends State<OnboardingView> {
           Positioned(
             top: 0,
             right: 0,
+            left: 0,
+            child: SafeArea(child: ColoredBox(color: Colors.black38).space(height: 60)),
+          ),
+          Positioned(
+            top: 5,
+            right: 0,
             child: SafeArea(
               child: ListenableBuilder(
                 listenable: _primaryController,

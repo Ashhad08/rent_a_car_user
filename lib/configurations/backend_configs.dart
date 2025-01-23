@@ -11,7 +11,11 @@ class BackendConfigs {
   final _byMake = 'search-by-make';
   final _byType = 'search-by-type';
   final _promotion = 'promo';
+  final _booking = 'booking';
+  final _createBooking = 'create-booking';
 
+  get booking => _booking;
+  final _bookingsByCustomer = 'user-bookings';
   get promotion => _promotion;
 
   get byMake => _byMake;
@@ -44,4 +48,8 @@ class BackendConfigs {
   get vehicleAllModels => _vehicleAllModels;
 
   get byType => _byType;
+
+  get createBooking => _createBooking;
+
+  get bookingsByCustomer => _bookingsByCustomer;
 }

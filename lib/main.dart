@@ -13,6 +13,7 @@ import 'constants/app_colors.dart';
 import 'constants/extensions.dart';
 import 'constants/theme.dart';
 import 'domain/implementations/auth/auth_repository.dart';
+import 'domain/implementations/booking/booking_repository.dart';
 import 'domain/implementations/master_data/master_data_repository.dart';
 import 'domain/implementations/promotion/promotion_repository.dart';
 import 'domain/implementations/vehicle/vehicle_repository.dart';
@@ -48,6 +49,10 @@ void main() {
       networkRepository: getIt<NetworkRepository>(),
       imageServices: getIt<ImageServices>()));
   getIt.registerSingleton(PromotionRepository(
+    backendConfigs: getIt<BackendConfigs>(),
+    networkRepository: getIt<NetworkRepository>(),
+  ));
+  getIt.registerSingleton(BookingRepository(
     backendConfigs: getIt<BackendConfigs>(),
     networkRepository: getIt<NetworkRepository>(),
   ));

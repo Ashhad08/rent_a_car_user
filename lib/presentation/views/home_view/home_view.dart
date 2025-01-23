@@ -13,6 +13,7 @@ import '../../../navigation/navigation_helper.dart';
 import '../../elements/app_text_field.dart';
 import '../../elements/vehicle_card.dart';
 import '../available_vehicles_view/available_vehicles_view.dart';
+import '../profile_view/profile_view.dart';
 import '../promotion_details_view/promotion_details_view.dart';
 import '../vehicles_by_make_view/vehicles_by_make_view.dart';
 import '../vehicles_by_type_view/vehicles_by_type_view.dart';
@@ -32,7 +33,9 @@ class HomeView extends StatelessWidget {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                getIt<NavigationHelper>().push(context, ProfileView());
+              },
               icon: Icon(
                 Icons.person_2_outlined,
                 color: context.colorScheme.onPrimary,

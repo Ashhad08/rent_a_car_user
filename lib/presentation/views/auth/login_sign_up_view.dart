@@ -239,6 +239,10 @@ class _SignupViewState extends State<SignupView> {
                 child: ElevatedButton(
                   onPressed: () async {
                     final utils = getIt<Utils>();
+                    if (_profileImage.value == null) {
+                      utils.showErrorFlushBar(context,
+                          message: 'Select Profile Image');
+                    }
                     if (_key.currentState!.validate() &&
                         !context.read<LoadingBloc>().state.isLoading) {
                       final repo = getIt<AuthRepository>();
